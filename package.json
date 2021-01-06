@@ -1,0 +1,25 @@
+{
+  "name": "@dashup/module-document",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/plugin-transform-typescript": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "@dashup/eslint-config-dashup": "0.0.1",
+    "@dashup/module": "^1.0.3",
+    "@fast-csv/parse": "^4.3.6",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "chunk": "0.0.3",
+    "got": "^11.8.1",
+    "moment": "^2.29.1"
+  }
+}

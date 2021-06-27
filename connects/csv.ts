@@ -63,7 +63,7 @@ export default class CSVConnect extends Struct {
   get views() {
     // return object of views
     return {
-      config : 'connect/csv/config',
+      config : 'connect/csv',
     };
   }
 
@@ -116,7 +116,7 @@ export default class CSVConnect extends Struct {
     // await
     await new Promise(async (resolve, reject) => {
       // fetch
-      got.stream(connect.file.url)
+      got.stream(connect.file[0] ? connect.file[0].url : connect.file.url)
         .on('end', resolve)
         .on('error', reject)
         .pipe(stream);
@@ -153,7 +153,7 @@ export default class CSVConnect extends Struct {
     // await
     await new Promise(async (resolve, reject) => {
       // fetch
-      got.stream(connect.file.url)
+      got.stream(connect.file[0] ? connect.file[0].url : connect.file.url)
         .on('end', resolve)
         .on('error', reject)
         .pipe(stream);

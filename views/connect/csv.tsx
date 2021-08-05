@@ -25,9 +25,12 @@ const ConnectCSV = (props = {}) => {
       struct : 'csv',
     }, 'sync', props.connect, {
       page  : props.page.get('_id'),
-      form  : props.page.get('data.forms.0'),
+      form  : props.getForms()[0] ? props.getForms()[0].get('_id') : null,
       model : props.page.get('data.model') || props.page.get('_id'),
     });
+
+    // reload
+    props.page.emit('reload');
 
     // pull
     setSyncing(false);

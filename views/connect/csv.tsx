@@ -194,7 +194,7 @@ const ConnectCSV = (props = {}) => {
           } }
           value={ props.connect.file }
           dashup={ props.dashup }
-          onChange={ (field, value) => props.setConnect('file', value) }
+          onChange={ (field, value) => props.setConnect('file', value && value[0]) }
         />
       </div>
     </div>

@@ -116,7 +116,7 @@ export default class CSVConnect extends Struct {
     // await
     await new Promise(async (resolve, reject) => {
       // fetch
-      got.stream(connect.file[0] ? connect.file[0].url : connect.file.url)
+      got.stream(connect.file.url)
         .on('end', resolve)
         .on('error', reject)
         .pipe(stream);
@@ -153,7 +153,7 @@ export default class CSVConnect extends Struct {
     // await
     await new Promise(async (resolve, reject) => {
       // fetch
-      got.stream(connect.file[0] ? connect.file[0].url : connect.file.url)
+      got.stream(connect.file.url)
         .on('end', resolve)
         .on('error', reject)
         .pipe(stream);
@@ -195,8 +195,14 @@ export default class CSVConnect extends Struct {
 
         // set fields
         Object.keys(connect.fields).forEach((uuid) => {
+          // find field
+          const subField = (formPage.get('data.fields') || []).find((c) => c.uuid === uuid || c.name === uuid);
+
+          // check field
+          if (!subField) return;
+
           // set value
-          update[uuid] = item[connect.fields[uuid]];
+          update[subField.name || subField.uuid] = item[connect.fields[uuid]];
         });
 
         // return update

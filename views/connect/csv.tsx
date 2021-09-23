@@ -2,8 +2,7 @@
 // import react
 import moment from 'moment';
 import shortid from 'shortid';
-import { Button } from 'react-bootstrap';
-import { View, Select } from '@dashup/ui';
+import { Button, View, Select } from '@dashup/ui';
 import React, { useState, useEffect } from 'react';
 
 // connect sheets

@@ -102,16 +102,19 @@ export default class CSVConnect extends Struct {
    */
   async fieldsAction(opts, connect) {
     // data
-    const data = [];
+    let item = null;
+    let stream = null;
     
     // stream
-    const stream = csv.parse({
-      headers : true,
-      maxRows : 1,
-    })
-      .on('error', error => console.error(error))
-      .on('data', (r) => data.push(r))
-      .on('end', (rowCount: number) => console.log(`Parsed ${rowCount} rows`));
+    const streamPromise = new Promise((resolve, reject) => {
+      stream = csv.parse({
+        headers : true,
+        maxRows : 1,
+      })
+        .on('error', error => console.error(error))
+        .on('data', (r) => item = r)
+        .on('end', resolve);
+    });
 
     // await
     await new Promise(async (resolve, reject) => {
@@ -121,13 +124,14 @@ export default class CSVConnect extends Struct {
         .on('error', reject)
         .pipe(stream);
     });
+    await streamPromise;
 
     // parse csv
-    return Object.keys(data[0]).map((key) => {
+    return Object.keys(item || {}).map((key) => {
       // key/value
       return {
         key,
-        value : data[0][key],
+        value : item[key],
       };
     });
   }
